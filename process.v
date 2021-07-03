@@ -7,7 +7,7 @@ module process (input wire data_in_valid,
                 output reg [7:0] b_data_out,
                 output wire data_out_ready);
     
-    wire [7:0] y_data;
+    /*wire [7:0] y_data;
     wire [7:0] cb_data;
     wire [7:0] cr_data;
     assign data_out_ready = data_in_valid;
@@ -33,6 +33,12 @@ module process (input wire data_in_valid,
             g_data_out = 8'd0;
             b_data_out = 8'd0;
         end
+    end*/
+    assign data_out_ready = data_in_valid;
+    always @(*) begin
+        r_data_out = r_data_in;
+        g_data_out = g_data_in;
+        b_data_out = b_data_in;
     end
     
 endmodule

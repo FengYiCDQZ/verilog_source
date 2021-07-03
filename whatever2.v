@@ -7,8 +7,8 @@ module whatever2 (input wire sys_clk,
                   output reg [7:0] data_out,
                   output reg data_out_ready);
     
-    parameter COUNT1_MAX = 10'd500;
-    reg [9:0] count1;
+    parameter COUNT1_MAX = 4000;
+    reg [31:0] count1;
     reg [1:0] count2;
     reg [7:0] r_data;
     reg [7:0] g_data;
@@ -31,18 +31,18 @@ module whatever2 (input wire sys_clk,
     
     always @(posedge sys_clk or negedge sys_rst_n) begin
         if (sys_rst_n == 1'b0) begin
-            count1 <= 10'd0;
+            count1 <= 0;
         end
         else begin
             if (data_in_valid == 1'b1) begin
-                count1 <= 10'd0;
+                count1 <= 0;
             end
             else begin
-                if (count1 == COUNT1_MAX-10'd1) begin
-                    count1 <= 10'd0;
+                if (count1 == COUNT1_MAX-1) begin
+                    count1 <= 0;
                 end
                 else begin
-                    count1 <= count1+10'd1;
+                    count1 <= count1+1;
                 end
             end
             
@@ -58,7 +58,7 @@ module whatever2 (input wire sys_clk,
                 count2 <= 2'd0;
             end
             else begin
-                if (count1 == COUNT1_MAX-10'd1) begin
+                if (count1 == COUNT1_MAX-1) begin
                     if (count2 == 2'd2) begin
                         count2 <= 2'd2;
                     end
@@ -75,7 +75,7 @@ module whatever2 (input wire sys_clk,
             data_out_ready <= 1'b0;
         end
         else begin
-            if (data_in_valid == 1'b1||(count1 == COUNT1_MAX-10'd1&&count2 < 2'd2)) begin
+            if (data_in_valid == 1'b1||(count1 == COUNT1_MAX-1&&count2 < 2'd2)) begin
                 data_out_ready <= 1'b1;
             end
             else begin

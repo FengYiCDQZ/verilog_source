@@ -68,7 +68,7 @@ module skin(input sys_clk,
     );
     
     whatever2
-    #(.COUNT1_MAX (10'd40))
+    #(.COUNT1_MAX (10'd4000))
     whatever2_dut(
     .sys_clk(sys_clk),
     .sys_rst_n(sys_rst_n),
